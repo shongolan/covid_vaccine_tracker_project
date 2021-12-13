@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Covid Vaccine Tracker{% endblock %}
+{% block body %}
+
+<footer>
+ <div class="d">
+  <div class="row">
+  <div class="col-md-5">
+   <h1><i class="fas fa-syringe"></i> &nbsp;Covid Vaccine Tracker</h1>
+   <p style="opacity: 70%;">Covid Vaccine tracker system is design to track how many people is vacinated in the area. This system helps the health care workers to monitor the amount of unvaccinated people in specific area.</p> 
+  </div>
+  <div class="col-md-7">
+    <div class="row">
+     <div class="col-md-4">
+      <h3 class="l">Links</h3>
+      <ul>
+       <li><a class="" href="{{url_for('home')}}">Home</a></li>
+       <li><a class="" href="{{url_for('monitor')}}">Monitoring</a></li>
+       <li><a class="" href="{{url_for('sched')}}">Schedule Vaccine</a></li>
+       <li><a class="" href="{{url_for('about')}}">About</a></li>
+       <li><a class="" href="{{url_for('done')}}">Done/Canceled Vaccine</a></li>
+      </ul>
+     </div>
+     <div class="col-md-6">
+      <h3>Social Links</h3>
+      <ul class="uls">
+       <li><a href=""><i class="fab fa-facebook"></i></a></li>
+       <li><a href=""><i class="fab fa-twitter"></i></a></li>
+       <li><a href=""><i class="fab fa-github"></i></a></li>
+      </ul>
+     </div>
+    </div>
+  </div>
+ </div>
+ </div>
+ 
+</footer>
+
+
+
+{% endblock %}

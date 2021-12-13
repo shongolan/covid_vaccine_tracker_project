@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}Covid Vaccine Tracker{% endblock %}
+
+{% block body %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+  <div id="alert" class="alert alert-{{ category }}" role="alert" style="z-index: 99;">
+    {{message}}
+  </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+<div class="signup" style="overflow-x: hidden;">
+  <div class="row" style="height: 100vh;">
+    <div class="col-md-6" style="padding: 60px !important;">
+      <h1 style="color: #000; opacity: 80%;">Create New Account</h1>
+      <form action="{{url_for('register')}}" method="POST" class="row g-3 mt-3">
+        <div class="col-md-12">
+          <label class="form-label">First Name</label>
+          <input type="text" name="fname" class="form-control" required>
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Last Name</label>
+          <input type="text" name="lname" class="form-control" required>
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Username</label>
+          <input type="text" name="uname" class="form-control" required>
+        </div>
+        <div class="col-md-12">
+          <label  class="form-label">Password</label>
+          <input type="password" name="pass" class="form-control" required>
+        </div>
+        <div class="col-md-12">
+          <label  class="form-label">Confirm Password</label>
+          <input type="password" name="cpass" class="form-control" required>
+        </div>
+        <div class="col-md-12">
+          <label  class="form-label">What is the name of your pet? (For recovery backup)</label>
+          <input type="text" name="pet" class="form-control" required>
+        </div>
+        <div class="col-12 mt-5">
+          <button type="submit" class="btn btn btn-primary">Signup Now</button>
+        </div>
+      </form>
+      <p class="mt-4" style="color: #000;">
+        By signing in you agree to our <a type="button"  data-bs-toggle="modal" data-bs-target="#privacy" style="text-decoration: underline; color: blue;">privacy policy</a>, <a type="button"  data-bs-toggle="modal" data-bs-target="#terms" style="text-decoration: underline; color: blue;">Terms and Conditions</a> in using our website.
+      </p>
+
+      <a href="{{url_for('index')}}" class="btn btn btn-primary">Go Back</a>
+    </div>
+    <div class="col-md-6 text-center" style="background-color: #23177b;">
+      <img src="static/images/signup.svg" alt="" style="margin-top: 200px; width: 30vw;">
+    </div>
+    
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="privacy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Privacy Policy</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        The data we gathered from you is confidentials and is not leaked to any site. 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="terms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Terms and Conditions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        By using our website you agree that all data is sensitive and not to be spread on the internet.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

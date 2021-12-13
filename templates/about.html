@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% include 'navbar.html' %}
+{% block title %}Covid Vaccine Tracker{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+ <h1 style="color: #000;">About</h1>
+ <p class="mt-3" style="color: #000;">More than 7.5 billion vaccine doses have been administered worldwide. Yet, only around 4.5 per cent of people in low-income countries have received at least one dose. While we need even more vaccines to meet demand, there are enough doses available among well-supplied countries to reach the world’s most vulnerable people right now.
+
+  At the G7 summit in June 2021, well-supplied countries pledged to donate 1 billion vaccines. Most of these pledges haven’t been fulfilled. This inequity is unjust and puts us all at risk. The longer the virus continues to spread unchecked, the higher the risk of more deadly or contagious variants emerging.   </p>
+ <br>
+ <p style="color: #000;">The COVAX Facility, a global partnership designed to achieve vaccine equity, faced extreme supply constraints in the first half of 2021. Unless COVAX can quickly secure more doses, unequal access to COVID-19 vaccines will undermine any attempt at a fast, fair and future proof recovery.</p>
+
+  <div class="video mt-5">
+   <iframe width="1280" height="720" src="https://www.youtube.com/embed/SdGP8m_aEy0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <div class="mt-5">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            2011
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p style="color: #000;">It was during 2011, as I was working in Brazil, when I started working on my original idea for how to publish the data and research on global change. The original idea was to write a book on the big global problems. </p>
+            
+            <p style="color: #000;">My plan was to address many of the big problems with a broad overview. To be able to write the book I started to collect all the data and research that would give me an understanding on where the world stands today and what we know about how to change it. In the first few years of working on this, my collection grew to many thousand datasets, visualizations, and publications. This collection later became the starting point for Our World in Data.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+           2012
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p style="color: #000;">In early 2012, I moved to Oxford to work with Sir Tony Atkinson on income inequality. Atkinson had spent several decades researching inequality and poverty. His work has an immense impact on all scholars who work in the field today and this is also true for my work and Our World in Data. None of it would have been possible without him.</p>
+            <p style="color: #000;">In these conversations we realized that it would be valuable to make the research available online. One discussion I remember well was about a typo Tony had found in his book on earnings inequality in OECD countries.1 It was a small typo in one of the table, but he was very unhappy about it and explained how much better it would be if he had published the book online instead. We decided to do that for this project on the world’s problems. In an online publication typos can be fixed, research can stay up-to-date, and many more people can benefit from it. Later that year I shifted the effort from writing a book to building this web publication.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            2013
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+           <p style="color: #000;">In early 2013 the Department of Economics at Oxford hired me as a post-doctoral researcher and I continued working with Tony Atkinson. Our World in Data was still my side-project, but the coverage of data and research grew. I managed to build a first version of the website and some early interactive visualizations (based on d3 and nvd3), and so I launched a first version of Our World in Data in the summer of that year. For many months the site was password-protected and I only shared it with a few friends. Looking back at old records, I see that I had just 202 visitors to the site in the first year.</p>
+           <p style="color: #000;">It was Tony who suggested the research that is published on Our World in Data could possibly be based at the University. I had previously thought of it as an entirely private project, but Tony’s idea made sense: while most researchers at universities publish in specialized scientific journals, this new research team would publish their work in an online publication that is freely accessible for everyone. In November 2013, we applied for a research grant from the London-based Nuffield Foundation. Principal Investigator was Sir David Hendry, who was at the time my boss at Oxford’s Institute for New Economic Thinking (INET). Half a year later we received a rejection from the Nuffield Foundation. I rewrote the application and reapplied. One year later, just before Christmas 2014, we received a letter from the Nuffield Foundation with the fantastic news that the work would now receive some funding.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <h1 style="color: #000;">FAQs</h1>
+    <p style="color: #000;">Freaquently Asked Questions:</p>
+    <ul style="color: #000;">
+      <li>What is Covid-19?</li>
+      <li>Does Vaccine is safe?</li>
+      <li>Does Vaccine is required?</li>
+      <li>What is the side effects of the vaccine?</li>
+    </ul>
+  </div>
+
+
+  <div class="mt-5 text-black mb-4">
+    <h1 style="color: #000;">Contacts</h1>
+    <ul style="color: #000;">
+      <li>Address: Israel</li>
+      <li>Contact No. 098763541</li>
+      <li>You can always contact us at shongolan24@gmail.com</li>
+    </ul>
+  </div>
+</div>
+
+
+{% include 'footer.html' %}
+{% endblock %}

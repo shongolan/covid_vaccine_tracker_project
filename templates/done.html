@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% include 'navbar.html' %}
+{% block title %}Covid Vaccine Tracker{% endblock %}
+
+{% block body %}
+
+<div class="container" style="height: 550px;">
+ <div class="row">
+  <div class="col-md-6">
+   <h3>Done Vacinated</h3>
+    <div class="col-md-12">
+      <div class="w-100" style="display: inline-flex; ">
+        <input type="text" class="form-control" id="searchDonee" onkeyup="searchDone(0)" placeholder="Search person in done vaccine...">
+        <span class="input-group-text bg-primary text-white"><i class="fas fa-search"></i></span>
+      </div>
+    </div>
+   <div class="overflow-auto" style="max-height: 600px;">
+  <table class="table table-success table-striped mt-3" id="myTable0">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Contact No.</th>
+          <th scope="col">Dose</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+       {% for row in allData %}
+         {% if row.date == 'Done' %}
+        <tr>
+          <td scope="row">{{row.id}}</td>
+          <td>{{row.fname}}</td>
+          <td>{{row.lname}}</td>
+          <td>{{row.mobnum}}</td>
+          {% if row.dose == '2nd Dose' %}
+          <td>1st and {{row.dose}}</td>
+          {% else %}
+            <td>{{row.dose}}</td>
+          {% endif %}
+          <td>{{row.date1}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+
+      </tbody>
+    </table>
+   </div>
+
+  </div>
+ 
+  <div class="col-md-6">
+   <h3>Cancelled Vaccine</h3>
+   <div class="col-md-12">
+    <div class="w-100" style="display: inline-flex; ">
+      <input type="text" class="form-control" id="searchCancelled" onkeyup="searchDone(1)" placeholder="Search person in cancelled table...">
+      <span class="input-group-text bg-primary text-white"><i class="fas fa-search"></i></span>
+    </div>
+   </div>
+   <div class="overflow-auto" style="max-height: 600px;">
+    <table class="table table-danger table-striped mt-3" id="myTable1">
+     <thead>
+       <tr>
+         <th scope="col">ID</th>
+         <th scope="col">First</th>
+         <th scope="col">Last</th>
+         <th scope="col">Contact No.</th>
+         <th scope="col">Action</th>
+       </tr>
+     </thead>
+     <tbody>
+      {% for row in allData %}
+        {% if row.date == 'Cancel' %}
+       <tr>
+        <td scope="row">{{row.id}}</td>
+        <td>{{row.fname}}</td>
+        <td>{{row.lname}}</td>
+        <td>{{row.mobnum}}</td>
+        
+        <td><a href="/update2/{{row.id}}" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{row.id}}">Reschedule</a></td>
+       </tr>
+       <!-- Modal -->
+       <div class="modal fade" id="exampleModal{{row.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Reschedule</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="{{url_for('update2')}}" method="POST">
+                <input type="hidden" name="id" value="{{row.id}}">
+
+                  <div id="req" class="col-md-4 mb-3">
+                    <label class="form-label">Reschedule Vaccine</label>
+                    <input type="date" min="{{date}}" name="schedu" class="form-control" required>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+              </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+       {% endif %}
+     {% endfor %}
+     </tbody>
+   </table>
+
+   </div>
+   
+  </div>
+ </div>
+</div>
+
+
+{% include 'footer.html' %}
+{% endblock %}

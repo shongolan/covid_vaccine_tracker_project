@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% include 'navbar.html' %}
+{% block title %}Covid Vaccine Tracker{% endblock %}
+
+{% block body %}
+ <div style="display: flex; justify-content: center;">
+  <div style="width: 1000px;">
+   <h1 class="mt-5">Add Resident Info</h1>
+   <form action="{{url_for('insert')}}" method="POST" class="row g-3 mt-3">
+    <div class="col-md-6">
+      <label class="form-label">First Name</label>
+      <input type="text" name="fname" class="form-control" id="fname" required>
+    </div>
+    <div class="col-md-6">
+      <label  class="form-label">Last Name</label>
+      <input type="text" name="lname" class="form-control" id="lname" required>
+    </div>
+    <div class="col-6">
+      <label  class="form-label">Address</label>
+      <input type="text" name="address" class="form-control" id="address" placeholder="Blk 17 Lot 38..." required>
+    </div>
+    <div class="col-6">
+      <label  class="form-label">City</label>
+      <input type="text" name="city" class="form-control" id="inputCity" required>
+   </div>
+    <div class="col-md-4">
+     <label class="form-label">ID Number</label>
+     <input type="number" min="0" name="idnum" class="form-control" id="idnum" required>
+    </div>
+    <div class="col-md-4">
+      <label  class="form-label">Mobile No.</label>
+      <input type="number" name="mobnum" class="form-control" id="mobnum" required>
+    </div>
+    <div class="col-md-2">
+      <label  class="form-label">Age</label>
+      <input type="number" min="3" name="age" class="form-control" id="age" required>
+    </div>
+    <div class="col-md-2">
+     <label class="form-label">Sex</label>
+     <select id="sex" name="sex" class="form-select">
+       <option selected>Male</option>
+       <option>Female</option>
+     </select>
+   </div>
+    <div id="req" class="col-md-4">
+      <label class="form-label" id="text">Schedule Vaccine for 1st Dose</label>
+      <input type="date" min="{{date}}" name="sched" id="sched" class="form-control" required>
+    </div>
+    <div class="col-md-2 mt-5">
+     <div class="form-check">
+       <input style="cursor: pointer;" onclick="showForm()"  type="radio" class="form-check-input" value="1st Dose" name="dose" id="st" checked>
+       <label class="form-check-label" for="radioDose">1st Dose</label>
+     </div>
+   </div>
+   <div class="col-md-2 mt-5">
+     <div class="form-check">
+       <input style="cursor: pointer;" type="radio" id="2ndDose" onclick="hideForm()" class="form-check-input" value="2nd Dose" name="dose">
+       <label class="form-check-label" for="radioDose">2nd Dose</label>
+     </div>
+   </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Save Data</button>
+    </div>
+   </form>
+
+   <div class="row mt-5">
+     <div class="col-md-6">
+       <h1>Resident's Data</h1>
+     </div>
+     <div class="col-md-6">
+      <div class="w-100" style="display: inline-flex; ">
+        <input type="text" class="form-control" id="searchAll" onkeyup="search(0)" placeholder="Search person...">
+        <span class="input-group-text bg-primary text-white"><i class="fas fa-search"></i></span>
+      </div>
+     </div>
+   </div>
+   
+    
+   <div class="tableDataIndex overflow-auto">
+    <table class="table table-striped mt-3" id="myTable">
+     <thead>
+       <tr>
+         <th scope="col">ID #</th>
+         <th scope="col">First Name</th>
+         <th scope="col">Last Name</th>
+         <th scope="col">Sex</th>
+         <th scope="col">Age</th>
+         <th scope="col">Dose</th>
+         <th scope="col">Action</th>
+       </tr>
+     </thead>
+     <tbody>
+       {% for row in allData %}
+        <tr>
+          <th scope="row">{{row.idnum}}</th>
+          <td>{{row.fname}}</td>
+          <td>{{row.lname}}</td>
+          <td>{{row.sex}}</td>
+          <td>{{row.age}}</td>
+          <td>{{row.dose}}</td>
+          <td>
+            <a href="/update/{{row.id}}" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{row.id}}">Edit</a>
+            <a href="/delete/{{row.id}}" class="btn btn-sm btn-danger">Delete</a>
+            <a class="btn btn-sm btn-primary" 
+            href="{{url_for('view',id=row.idnum, fname=row.fname, lname=row.lname,
+                                   sex=row.sex, age=row.age, dose=row.dose, address=row.address,
+                                   city=row.city,mobnum=row.mobnum )}}" >View</a>
+          </td>
+        </tr>
+        <!-- Modal -->
+          <div class="modal fade" id="exampleModal{{row.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Information</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="{{url_for('update')}}" method="POST">
+                    <input type="hidden" name="id" value="{{row.id}}">
+                      <div class="row">
+                        <div class="col-6">
+                          <label class="form-label">First Name</label>
+                          <input type="text" name="fname" class="form-control" placeholder="First name" value="{{row.fname}}" aria-label="First name">
+                        </div>
+                        <div class="col-6">
+                          <label class="form-label">Last Name</label>
+                          <input type="text" name="lname" class="form-control" placeholder="Last name" value="{{row.lname}}" aria-label="Last name">
+                        </div>
+                      </div>
+                      <div class="col-12 mt-3">
+                        <label class="form-label">Address</label>
+                        <input type="text" name="address" class="form-control" id="address" placeholder="Address" value="{{row.address}}" required>
+                      </div>
+                      <div class="col-12 mt-3">
+                        <label class="form-label">City</label>
+                        <input type="text" name="city" class="form-control" id="inputCity" placeholder="City" value="{{row.city}}" required>
+                      </div>
+                      <div class="row">
+                        <div class="col-6 mt-3">
+                          <label class="form-label">ID No.</label>
+                          <input type="text" name="idnum" class="form-control" id="address" placeholder="ID Number" value="{{row.idnum}}" required>
+                        </div>
+                        <div class="col-6 mt-3">
+                          <label class="form-label">Mobile No.</label>
+                          <input type="text" name="mobnum" class="form-control" id="inputCity" placeholder="Mobile No." value="{{row.mobnum}}" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6 mt-3">
+                          <label class="form-label">Age</label>
+                          <input type="text" name="age" min="3" class="form-control" id="address" placeholder="Age" value="{{row.age}}" required>
+                        </div>
+                        <div class="col-6 mt-3">
+                          <label class="form-label">Sex</label>
+                          {% if row.sex == 'Male' %}
+                          <select id="sex" name="sex" class="form-select">
+                            <option selected>Male</option>
+                            <option>Female</option>
+                          </select>
+                          {% else %}
+                          <select id="sex" name="sex" class="form-select">
+                            <option selected>Female</option>
+                            <option>Male</option>
+                          </select>
+                          {% endif %}
+                        </div>
+                      </div>
+                      {% if row.dose == '1st Dose' %}
+                        <div class="row my-3"> 
+                          <div class="col-md-6">
+                            <div class="form-check">
+                              <input style="cursor: pointer;" type="radio" class="form-check-input" value="1st Dose" name="dose" checked>
+                              <label class="form-check-label" for="radioDose">1st Dose</label>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-check">
+                              <input style="cursor: pointer;" type="radio" class="form-check-input" value="2nd Dose" name="dose">
+                              <label class="form-check-label" for="radioDose">2nd Dose</label>
+                            </div>
+                          </div>
+                        </div>
+                      {% else %}
+                        <div class="row my-3"> 
+                          <div class="col-md-6">
+                            <div class="form-check">
+                              <input style="cursor: pointer;" type="radio" class="form-check-input" value="1st Dose" name="dose">
+                              <label class="form-check-label" for="radioDose">1st Dose</label>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-check">
+                              <input style="cursor: pointer;" type="radio" class="form-check-input" value="2nd Dose" name="dose" checked>
+                              <label class="form-check-label" for="radioDose">2nd Dose</label>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+       {% endfor %}
+     </tbody>
+    </table>
+      <div class="no-search text-center" id="no-search">
+        <img  src="static/images/search.svg" alt="">
+        <h1>Search Not Found...</h1>
+      </div>
+   </div>
+  </div>
+ </div>
+
+ <div>
+  <canvas id="myChart"></canvas>
+  </div>
+ 
+
+
+ {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+    <div id="alert" class="alert alert-success" role="alert" style="opacity: 100% !important;">
+      {{message}} {{category}}
+    </div>
+      
+    {% endfor %}
+  {% endif %}
+ {% endwith %}
+ {% include 'footer.html' %}
+{% endblock %}
+

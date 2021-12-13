@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Covid Vaccine Tracker{% endblock %}
+
+{% block body %}
+
+ <center><h1 class="loginh1" style="color: #000;">Covid Vaccine Tracker | Login</h1></center>
+ <div class="container">
+  <div class="row">
+   <div class="col-lg mb-4">
+    <img src="static/images/login.svg" alt="">
+   </div>
+   <div class="col-lg">
+    <form action="" method="POST">
+     <div class="mb-3">
+      {{ form.hidden_tag() }}
+      {{ form.username.label(class_="form-label")}}
+      {{ form.username(class_="form-control") }}
+     </div>
+     <div class="mb-3">
+      {{ form.password.label(class_="form-label")}}
+      {{ form.password(class_="form-control") }}
+     </div>
+     <div class="col-12">
+      {{ form.submit(class_="btn btn-primary w-100") }}
+    </div>
+    <a class="mt-3" type="button" data-bs-toggle="modal" data-bs-target="#forgot" style="color: blue; text-decoration: underline;">forgot password</a>
+    
+    </form>
+    
+    <p class="bp mt-4" style="color: #000;">COVID 19-vaccines are effective and can reduce the risk of getting 
+     and spreading the virus that causes COVID-19. Learn 
+     more about the different COVID-19 vaccines. COVID-19 
+     vaccines also help children and adults from getting seriously 
+     ill even if they do get COVID-19.</p>
+     <a href="{{url_for('signupPage')}}">Signup Now!</a>
+   </div>
+  </div>
+ </div>
+ <!-- Modal -->
+ <div class="modal fade" id="forgot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="forgot">Forgot Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('forgot')}}" method="POST" class="row g-3">
+          <div class="col-md-12">
+            <label class="form-label">Username</label>
+            <input type="text" name="uname" class="form-control" required>
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">Name of your pet</label>
+            <input type="text" name="pet" class="form-control" required>
+          </div>
+          <div class="col-12 mt-5">
+            <button type="submit" class="btn btn btn-primary w-100">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+ <center><p class="p" style="color: #000;">&copy; 2021 Covid Vaccine Tracker. Alright Reserved.</p></center>
+ {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div id="alert" class="alert alert-danger" role="alert" style="z-index: 10;">
+      {{message}}
+    </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+{% endblock %}

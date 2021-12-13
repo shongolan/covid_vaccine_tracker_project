@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% include 'navbar.html' %}
+{% block title %}Covid Vaccine Tracker{% endblock %}
+
+{% block body %}
+<div class="mx-4" style="display: flex; justify-content: center; margin-top: 100px;">
+ <div class="card" style="width: 1000px;">
+  <div class="card-header">
+    Other Information
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">ID Number: {{id}}</h5>
+    <h4>Name {{fname}} {{lname}}</h4>
+    <ul>
+     <li><b>Age:</b> {{age}} y/o</li>
+     <li><b>Address:</b> {{address}}</li>
+     <li><b>City:</b> {{city}}</li>
+     <li><b>Mobile No.:</b> {{mobnum}}</li>
+     <li><b>Sex:</b> {{sex}}</li>
+     <li><b>Dose:</b> {{dose}}</li>
+    </ul>   
+  </div>
+ </div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}
