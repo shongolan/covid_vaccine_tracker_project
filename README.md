@@ -1,1 +1,1 @@
-# covid_vscccine_tracker_project
+# covid_vaccine_tracker_project
