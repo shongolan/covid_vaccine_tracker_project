@@ -2,5 +2,12 @@
 {% block title %}Covid Vaccine Tracker{% endblock %}
 
 {% block body %}
-<h1>Your password is {{p}}</h1>
+<center>
+ <div class="card mt-5 w-50">
+  <div class="card-body text-center">
+   <h1 style="color: #000;">{{p}}</h1>
+  </div>
+ </div>
+ <a href="{{url_for('index')}}" class="mt-3 btn btn-primary">Back to login</a>
+</center>
 {% endblock %}

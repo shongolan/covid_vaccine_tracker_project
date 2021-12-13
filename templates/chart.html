@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <link rel="icon" href="static/images/icon.svg" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Covid Vaccine Tracker Chart</title>
+</head>
+<body>
+ <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{url_for('home')}}"><i class="fas fa-syringe"></i> &nbsp;Covid Vaccine Tracker</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('home')}}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('monitor')}}">Monitoring</a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" href="{{url_for('sched')}}">Schedule Vaccine</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="{{url_for('about')}}">About</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="{{url_for('done')}}">Done/Canceled Vaccine</a>
+       </li>  
+       <li class="nav-item">
+         <a class="nav-link active" href="{{url_for('chart')}}">Monitoring Chart</a>
+       </li>  
+      </ul>
+    </div>
+    <div class="d-flex">
+     <a class="nav-link" style="color: #fff !important;" href="{{url_for('index')}}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </div>
+ </nav>
+
+
+ <div class="container" style="width: 800px;">
+  <canvas id="myChart" width="800" height="800"></canvas>
+ </div>
+
+ <div style="visibility: hidden;">
+  <div class="tableData overflow-auto">
+   <table class="table table-striped" id="myTable1">
+    <thead>
+     <tr>
+      <th scope="col">ID #</th>
+     </tr>
+   </thead>
+   <tbody>
+     {% for row in allData %}
+       {% if row.dose == '1st Dose' %}
+         <tr>
+         <th scope="row">{{row.idnum}}</th>
+         </tr>
+       {% endif %}
+     {% endfor %}
+    </tbody>
+   </table>
+  </div>
+ </div>
+
+ <div style="visibility: hidden; position: absolute;">
+  <div class="tableData overflow-auto">
+  <table class="table table-striped" id="myTable2">
+   <thead>
+    <tr>
+     <th scope="col">ID #</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for row in allData %}
+     {% if row.dose == '2nd Dose' %}
+       <tr>
+       <th scope="row">{{row.idnum}}</th>
+       </tr>
+     {% endif %}
+   {% endfor %}
+   </tbody>
+  </table>
+  </div>
+ </div>
+
+ 
+ {% include 'footer.html' %}
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script>
+  let first = $('#myTable1 >tbody >tr').length;
+  let second = $('#myTable2 >tbody >tr').length;
+  let allDose = first + second
+  first = parseInt(first);
+  second = parseInt(second);
+  allDose = parseInt(allDose);
+ const data = {
+   labels: [
+     'Total Vaccinated (1st Dose)',
+     'Total Vaccinated (2nd Dose)',
+     'Total Residents Vaccinated'
+   ],
+   datasets: [{
+     label: 'My First Dataset',
+     data: [first, second, allDose],
+     backgroundColor: [
+       'rgb(255, 99, 132)',
+       'rgb(54, 162, 235)',
+       'rgb(255, 205, 86)'
+     ],
+     hoverOffset: 4
+   }]
+ };
+ const config = {
+  type: 'doughnut',
+  data: data,
+ };
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+ </script>
+</body>
+</html>

@@ -271,7 +271,7 @@ def signupPage():
     return render_template('signup.html')
 
 
-@ app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
         username = request.form['uname']
@@ -291,7 +291,7 @@ def register():
     return redirect(url_for('signupPage'))
 
 
-@ app.route('/forgot', methods=['POST'])
+@app.route('/forgot', methods=['POST'])
 def forgot():
     all_data = Account.query.all()
     listt = []
@@ -307,14 +307,23 @@ def forgot():
         pet = request.form['pet']
         for i in range(len(listt)):
             if u == listt[i][0] and pet == listt[i][1]:
-                p = listt[i][2]
+                passwrd = listt[i][2]
+                p = f'Your password is {passwrd}'
                 return render_template('showpasswrod.html', p=p)
             elif u == listt[i][0] and pet != listt[i][1]:
-                print(f'{u} has no pet {pet}')
+                p = f"{u} has no pet '{pet}'"
+                return render_template('showpasswrod.html', p=p)
             elif u != listt[i][0]:
-                print(f'{u} doesnt exist ')
+                p = f"'{u}' username doesnt exist!"
+                return render_template('showpasswrod.html', p=p)
 
     return redirect(url_for('index'))
+
+
+@app.route('/chart')
+def chart():
+    all_data = Data.query.all()
+    return render_template('chart.html', allData=all_data)
 
 
 if __name__ == '__main__':
