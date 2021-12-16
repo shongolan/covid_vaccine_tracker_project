@@ -8,7 +8,8 @@ from datetime import date
 app = Flask(__name__)
 app.secret_key = "1234"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/flask_project'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/flask_project'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://beffe282d753f7:8d0d7099@us-cdbr-east-05.cleardb.net'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -326,5 +327,10 @@ def chart():
     return render_template('chart.html', allData=all_data)
 
 
+@app.route('/covidFacts')
+def covid():
+    return render_template('covid.html')
+
+
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True)
