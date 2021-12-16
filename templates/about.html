@@ -20,14 +20,17 @@
          <a class="nav-link" href="{{url_for('sched')}}">Schedule Vaccine</a>
        </li>
        <li class="nav-item">
-         <a class="nav-link active" href="{{url_for('about')}}">About</a>
-       </li>
-       <li class="nav-item">
          <a class="nav-link" href="{{url_for('done')}}">Done/Canceled Vaccine</a>
        </li>  
        <li class="nav-item">
          <a class="nav-link" href="{{url_for('chart')}}">Monitoring Chart</a>
        </li>  
+       <li class="nav-item">
+        <a class="nav-link" href="{{url_for('covid')}}">Facts About Covid</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="{{url_for('about')}}">About</a>
+      </li>  
       </ul>
     </div>
     <div class="d-flex">
@@ -116,6 +119,12 @@
   </div>
 </div>
 
+<div class="container">
+  <h1 class="mt-5">Want to read more?</h1>
+  <a href="https://www.who.int/news-room/feature-stories/detail/how-do-vaccines-work?adgroupsurvey={adgroupsurvey}&gclid=CjwKCAiA-9uNBhBTEiwAN3IlNKvr1oBBQYaV9CHaW_xX1gcauUDCM_9O0UMGVNUZSaMvxJA8cSeEcBoCodQQAvD_BwE">How does covid 19 vaccine work?</a>
+  <br><a href="https://www.yalemedicine.org/news/covid-19-vaccine-comparison">Comparing the COVID-19 Vaccines: How Are They Different?</a>
+  <br><a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/different-vaccines.html">Different COVID-19 Vaccines</a>
+</div>
 
 {% include 'footer.html' %}
 {% endblock %}

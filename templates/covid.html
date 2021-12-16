@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title %}Covid Vaccine Tracker{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{url_for('home')}}"><i class="fas fa-syringe"></i> &nbsp;Covid Vaccine Tracker</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('home')}}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('monitor')}}">Monitoring</a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" href="{{url_for('sched')}}">Schedule Vaccine</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="{{url_for('done')}}">Done/Canceled Vaccine</a>
+       </li>  
+       <li class="nav-item">
+         <a class="nav-link" href="{{url_for('chart')}}">Monitoring Chart</a>
+       </li>  
+       <li class="nav-item">
+        <a class="nav-link active" href="{{url_for('covid')}}">Facts About Covid</a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{{url_for('about')}}">About</a>
+      </li>
+      </ul>
+    </div>
+    <div class="d-flex">
+     <a class="nav-link" style="color: #fff !important;" href="{{url_for('index')}}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container text-center mb-5 text-center">
+  <div class="d-flex justify-content-center mb-5">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 1000px;">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="static/images/1.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="static/images/2.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="static/images/3.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  </div>
+  <h1>How does COVID-19 spread?</h1>
+  <p style="color: #626567;">The virus is transmitted through direct contact with respiratory droplets of an infected person.</p>
+  <div class="row">
+    <div class="col-md-5  text-end">
+      <img src="static/images/handshake.svg" alt="" style="width: 300px">
+    </div>
+    <div class="col-md-7  text-start mt-5">
+      <h2 class="mt-5" style="color: #6C63FF;">Personal Contact</h2><br>
+      <p style="color: #000; margin-top: -20px;">Direct skin to skin contact increase likelihood of infection. Whether or not they have symptoms, infected people can be contagious and the virus can spread from them to other people. </p>
+    </div>
+    
+    <div class="col-md-5  text-end mt-5">
+      <h2 class="mt-5" style="color: #6C63FF;">Gatherings</h2><br>
+      <p style="color: #000; margin-top: -20px;">Gatherings may bring a massive infection to all people that attend. Avoid crowded places, poorly ventilated, indoor locations and avoid prolonged contact with others. Spend more time outdoors than indoors</p>
+    </div>
+    <div class="col-md-7  text-start">
+      <img src="static/images/gathering.svg" alt="" style="width: 300px">
+    </div>
+
+    <div class="col-md-5  text-end">
+      <img src="static/images/touch.svg" alt="" style="width: 230px">
+    </div>
+    <div class="col-md-7  text-start mt-5">
+      <h2 class="mt-5" style="color: #6C63FF;">Touching Infected Surface</h2><br>
+      <p style="color: #000; margin-top: -20px;">Touching infected surface may cause you to get the virus. Avoid touching surfaces, especially in public settings or health facilities, in case people infected with COVID-19 have touched them. Clean surfaces regularly with standard disinfectants. </p>
+    </div>
+
+    <div class="col-md-5  text-end mt-5">
+      <h2 class="mt-5" style="color: #6C63FF;">Distance</h2><br>
+      <p style="color: #000; margin-top: -20px;">Not keeping the 2 meter distance will cause the virus to be easily transmitted to one person to another.</p>
+    </div>
+    <div class="col-md-7  text-start">
+      <img src="static/images/distance.svg" alt="" style="width: 300px">
+    </div>
+  </div>
+</div>
+
+<div class="container text-center mb-5">
+  <img src="static/images/fmask.png" alt="" style="width: 200px; border-radius: 100%;">
+  <h1>How can I avoid being infected by COVID-19?</h1>
+  <ul class="mt-5 text-start">
+    <li>Maintain a safe distance from others (at least 2 meter), even if they don’t appear to be sick.</li>
+    <li>Wear a mask in public, especially indoors or when physical distancing is not possible.</li>
+    <li>Choose open, well-ventilated spaces over closed ones. Open a window if indoors.</li>
+    <li>Clean your hands often. Use soap and water, or an alcohol-based hand rub.</li>
+    <li>Get vaccinated when it’s your turn. Follow local guidance about vaccination.</li>
+    <li>Cover your nose and mouth with your bent elbow or a tissue when you cough or sneeze.</li>
+    <li>Stay home if you feel unwell.</li>
+  </ul>
+  <h1 class="mt-5">Want to read more?</h1>
+  <a href="https://www.who.int/news-room/feature-stories/detail/how-do-vaccines-work?adgroupsurvey={adgroupsurvey}&gclid=CjwKCAiA-9uNBhBTEiwAN3IlNKvr1oBBQYaV9CHaW_xX1gcauUDCM_9O0UMGVNUZSaMvxJA8cSeEcBoCodQQAvD_BwE">How does covid 19 vaccine work?</a>
+  <br><a href="https://www.yalemedicine.org/news/covid-19-vaccine-comparison">Comparing the COVID-19 Vaccines: How Are They Different?</a>
+  <br><a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/different-vaccines.html">Different COVID-19 Vaccines</a>
+</div>
+
+
+
+
+
+{% include 'footer.html' %}
+{% endblock %}
